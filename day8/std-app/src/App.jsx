@@ -9,14 +9,12 @@ function App() {
     name: "",
     department: "",
     year: "",
-    section: "",
-    dob: "",
     phone: "",
-    address: "",
     status: "Absent",
   });
 
   const [search, setSearch] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
 
   const handleChange = (e) => {
     setStudent({
@@ -25,39 +23,51 @@ function App() {
     });
   };
 
-  const addStudent = () => {
-    if (
-      student.id === "" ||
-      student.name === "" ||
-      student.department === "" ||
-      student.year === "" ||
-      student.section === "" ||
-      student.dob === "" ||
-      student.phone === "" ||
-      student.address === ""
-    ) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    setStudents([...students, student]);
-
+  const clearForm = () => {
     setStudent({
       id: "",
       name: "",
       department: "",
       year: "",
-      section: "",
-      dob: "",
       phone: "",
-      address: "",
       status: "Absent",
     });
+    setEditIndex(null);
+  };
+
+  const saveStudent = () => {
+    if (
+      !student.id ||
+      !student.name ||
+      !student.department ||
+      !student.year ||
+      !student.phone
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (editIndex !== null) {
+      const updated = [...students];
+      updated[editIndex] = student;
+      setStudents(updated);
+      setEditIndex(null);
+    } else {
+      setStudents([...students, student]);
+    }
+
+    clearForm();
+  };
+
+  const editStudent = (index) => {
+    setStudent(students[index]);
+    setEditIndex(index);
   };
 
   const deleteStudent = (index) => {
-    const updated = students.filter((_, i) => i !== index);
-    setStudents(updated);
+    if (window.confirm("Delete this student?")) {
+      setStudents(students.filter((_, i) => i !== index));
+    }
   };
 
   const filteredStudents = students.filter(
@@ -73,20 +83,28 @@ function App() {
   return (
     <div className="container">
 
-      {/* HEADER */}
       <div className="header">
         <h1>🎓 Student Management System</h1>
         <p>Manage Student Records Easily</p>
       </div>
 
-      {/* DASHBOARD */}
       <div className="dashboard">
-        <div className="card blue">Total Students: {total}</div>
-        <div className="card green">Present: {present}</div>
-        <div className="card red">Absent: {absent}</div>
+        <div className="card blue">
+          <h2>{total}</h2>
+          <p>Total Students</p>
+        </div>
+
+        <div className="card green">
+          <h2>{present}</h2>
+          <p>Present</p>
+        </div>
+
+        <div className="card red">
+          <h2>{absent}</h2>
+          <p>Absent</p>
+        </div>
       </div>
 
-      {/* FORM */}
       <div className="form">
 
         <input
@@ -129,26 +147,6 @@ function App() {
           <option>4th Year</option>
         </select>
 
-        {/* SECTION */}
-        <select
-          name="section"
-          value={student.section}
-          onChange={handleChange}
-        >
-          <option value="">Section</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
-          <option>D</option>
-        </select>
-
-        <input
-          type="date"
-          name="dob"
-          value={student.dob}
-          onChange={handleChange}
-        />
-
         <input
           name="phone"
           placeholder="Phone Number"
@@ -156,25 +154,7 @@ function App() {
           onChange={handleChange}
         />
 
-        <input
-          name="address"
-          placeholder="Address"
-          value={student.address}
-          onChange={handleChange}
-        />
-
         <div className="attendance">
-          <label>
-            <input
-              type="radio"
-              name="status"
-              value="Absent"
-              checked={student.status === "Absent"}
-              onChange={handleChange}
-            />
-            Absent
-          </label>
-
           <label>
             <input
               type="radio"
@@ -185,13 +165,30 @@ function App() {
             />
             Present
           </label>
+
+          <label>
+            <input
+              type="radio"
+              name="status"
+              value="Absent"
+              checked={student.status === "Absent"}
+              onChange={handleChange}
+            />
+            Absent
+          </label>
         </div>
 
-        <button onClick={addStudent}>➕ Add Student</button>
+        <button onClick={saveStudent}>
+          {editIndex === null ? "➕ Add Student" : "✏ Update Student"}
+        </button>
+
+        <button className="clear-btn" onClick={clearForm}>
+          Clear
+        </button>
+
       </div>
 
-      {/* SEARCH */}
-      <div className="search">
+      <div className="top-bar">
         <input
           placeholder="Search by ID or Name..."
           value={search}
@@ -199,8 +196,8 @@ function App() {
         />
       </div>
 
-      {/* TABLE */}
       <div className="table-container">
+
         <table>
 
           <thead>
@@ -209,54 +206,62 @@ function App() {
               <th>Name</th>
               <th>Department</th>
               <th>Year</th>
-              <th>Section</th>
-              <th>DOB</th>
               <th>Phone</th>
-              <th>Address</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
+
             {filteredStudents.length === 0 ? (
               <tr>
-                <td colSpan="10">No Students Found</td>
+                <td colSpan="7">No Students Found</td>
               </tr>
             ) : (
-              filteredStudents.map((s, i) => (
-                <tr key={i}>
+              filteredStudents.map((s, index) => (
+                <tr key={index}>
                   <td>{s.id}</td>
                   <td>{s.name}</td>
                   <td>{s.department}</td>
                   <td>{s.year}</td>
-                  <td>{s.section}</td>
-                  <td>{s.dob}</td>
                   <td>{s.phone}</td>
-                  <td>{s.address}</td>
 
                   <td>
-                    {s.status === "Present" ? (
-                      <span className="present">🟢 Present</span>
-                    ) : (
-                      <span className="absent">🔴 Absent</span>
-                    )}
+                    <span
+                      className={
+                        s.status === "Present"
+                          ? "present"
+                          : "absent"
+                      }
+                    >
+                      {s.status}
+                    </span>
                   </td>
 
                   <td>
                     <button
-                      className="delete-btn"
-                      onClick={() => deleteStudent(i)}
+                      className="edit-btn"
+                      onClick={() => editStudent(index)}
                     >
-                      🗑 Delete
+                      Edit
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteStudent(index)}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>
               ))
             )}
+
           </tbody>
 
         </table>
+
       </div>
 
     </div>
