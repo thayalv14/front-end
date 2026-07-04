@@ -1,19 +1,30 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Poppins,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-  background:#f5f7fa;
+body {
+  background: #f4f6f9;
+  color: #333;
 }
 
-button{
-  cursor:pointer;
+img {
+  display: block;
+  max-width: 100%;
 }
 
-img{
-  width:100%;
-  display:block;
+button {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input,
+select {
+  outline: none;
 }
