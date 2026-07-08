@@ -1,0 +1,105 @@
+import { useState, useEffect } from "react";
+import EmployeeForm from "../components/EmployeeForm";
+import EmployeeList from "../components/EmployeeList";
+import SearchBar from "../components/SearchBar";
+
+import {
+  getEmployees,
+  addEmployee,
+  updateEmployee,
+  deleteEmployee,
+} from "../services/employeeService";
+
+function EmployeeListPage() {
+  const [employees, setEmployees] = useState([]);
+  const [editingEmployee, setEditingEmployee] = useState(null);
+  const [search, setSearch] = useState("");
+
+  // Load Employees
+  const loadEmployees = async () => {
+    try {
+      const data = await getEmployees();
+      setEmployees(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    loadEmployees();
+  }, []);
+
+  // Add Employee
+  const handleAdd = async (employee) => {
+    try {
+      await addEmployee(employee);
+      loadEmployees();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Edit Employee
+  const handleEdit = (employee) => {
+    setEditingEmployee(employee);
+  };
+
+  // Update Employee
+  const handleUpdate = async (id, employee) => {
+    try {
+      await updateEmployee(id, employee);
+
+      alert("Employee Updated Successfully");
+
+      loadEmployees();
+
+      setEditingEmployee(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Delete Employee
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure to delete this employee?"
+    );
+
+    if (confirmDelete) {
+      await deleteEmployee(id);
+      loadEmployees();
+    }
+  };
+
+  // Search
+  const filteredEmployees = employees.filter((employee) =>
+    employee.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="page-container">
+
+      <h1>👨‍💼 Employee Management</h1>
+
+      <EmployeeForm
+        onAdd={handleAdd}
+        onUpdate={handleUpdate}
+        editingEmployee={editingEmployee}
+      />
+
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+      />
+
+      <EmployeeList
+        employees={filteredEmployees}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+
+    </div>
+  );
+}
+
+export default EmployeeListPage;
