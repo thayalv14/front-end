@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html,body,#root{
+  width:100%;
+  height:100%;
+}
+
+body{
+  background: linear-gradient(-45deg,#ff6b6b,#feca57,#48dbfb,#1dd1a1);
+  background-size:400% 400%;
+  animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
