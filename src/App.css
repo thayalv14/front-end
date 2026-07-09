@@ -1,0 +1,344 @@
+/* =========================
+   Global
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#FFF8F2;
+    color:#444;
+}
+
+a{
+    text-decoration:none;
+}
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar{
+    background:#FDEDDC;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.navbar h2{
+    color:#C2410C;
+    font-size:25px;
+}
+
+.navbar div{
+    display:flex;
+    gap:25px;
+}
+
+.navbar a{
+    color:#9A3412;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.navbar a:hover{
+    color:#EA580C;
+}
+
+/* =========================
+   Pages
+========================= */
+
+.page-container,
+.home-container{
+    width:90%;
+    margin:30px auto;
+}
+
+.page-container h1,
+.home-container h1{
+    text-align:center;
+    color:#C2410C;
+    margin-bottom:20px;
+}
+
+/* =========================
+ Dashboard Cards
+========================= */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+/* Soft Card Colors */
+
+.card:nth-child(1){
+    background:#DBEAFE;
+}
+
+.card:nth-child(2){
+    background:#D1FAE5;
+}
+
+.card:nth-child(3){
+    background:#FEF3C7;
+}
+
+.card:nth-child(4){
+    background:#FCE7F3;
+}
+
+.card h1{
+    color:#333;
+    font-size:40px;
+}
+
+.card h3{
+    color:#555;
+}
+
+/* =========================
+ Employee Form
+========================= */
+
+.form-container{
+    width:60%;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.form-container h2{
+    text-align:center;
+    color:#C2410C;
+    margin-bottom:20px;
+}
+
+.form-container input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.form-container input:focus{
+    outline:none;
+    border-color:#EA580C;
+}
+
+/* =========================
+ Buttons
+========================= */
+
+button{
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.form-container button{
+    width:100%;
+    background:#EA580C;
+}
+
+.edit-btn{
+    background:#22C55E;
+    margin-right:8px;
+}
+
+.edit-btn:hover{
+    background:#16A34A;
+}
+
+.delete-btn{
+    background:#EF4444;
+}
+
+.delete-btn:hover{
+    background:#DC2626;
+}
+
+.back-btn{
+    background:#6B7280;
+}
+
+/* =========================
+ Search
+========================= */
+
+.search-container{
+    margin:20px 0;
+}
+
+.search-input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+/* =========================
+ Employee Table
+========================= */
+
+.table-container{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#FDEDDC;
+}
+
+thead th{
+    color:#9A3412;
+}
+
+th,
+td{
+    padding:15px;
+    text-align:center;
+}
+
+tbody tr{
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:nth-child(even){
+    background:#FFF7ED;
+}
+
+tbody tr:hover{
+    background:#FDEDDC;
+}
+
+/* =========================
+ Departments
+========================= */
+
+.department-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.department-card{
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+    color:#333;
+    font-weight:bold;
+}
+
+.department-card:hover{
+    transform:translateY(-8px);
+}
+
+.department-card:nth-child(1){
+    background:#DBEAFE;
+}
+
+.department-card:nth-child(2){
+    background:#D1FAE5;
+}
+
+.department-card:nth-child(3){
+    background:#FEF3C7;
+}
+
+.department-card:nth-child(4){
+    background:#FCE7F3;
+}
+
+.department-card:nth-child(5){
+    background:#E9D5FF;
+}
+
+.department-card:nth-child(6){
+    background:#FDEDDC;
+}
+
+/* =========================
+ Reports
+========================= */
+
+.report-box{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+/* =========================
+ Responsive
+========================= */
+
+@media(max-width:768px){
+
+.navbar{
+    flex-direction:column;
+    gap:15px;
+}
+
+.navbar div{
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.form-container{
+    width:95%;
+}
+
+.dashboard-cards{
+    grid-template-columns:1fr;
+}
+
+.department-container{
+    grid-template-columns:1fr;
+}
+
+table{
+    font-size:14px;
+}
+
+}
