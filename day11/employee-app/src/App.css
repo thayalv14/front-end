@@ -1,0 +1,294 @@
+/* =======================
+   Google Font
+======================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#F7FAFC;
+    color:#374151;
+}
+
+/* =======================
+   Navbar
+======================= */
+
+.navbar{
+    background:#D8F3DC;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.navbar h2{
+    color:#1B4332;
+    font-size:28px;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#1B4332;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#2D6A4F;
+}
+
+/* =======================
+   Page
+======================= */
+
+.page-container,
+.home-container{
+    width:90%;
+    margin:30px auto;
+}
+
+.page-container h1,
+.home-container h1{
+    text-align:center;
+    color:#1B4332;
+    margin-bottom:25px;
+}
+
+/* =======================
+   Dashboard Cards
+======================= */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card:nth-child(1){
+    background:#DBEAFE;
+}
+
+.card:nth-child(2){
+    background:#D1FAE5;
+}
+
+.card:nth-child(3){
+    background:#FCE7F3;
+}
+
+.card:nth-child(4){
+    background:#E9D5FF;
+}
+
+.card h1{
+    font-size:40px;
+    margin-top:10px;
+}
+
+/* =======================
+   Form
+======================= */
+
+.form-container{
+    width:60%;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.form-container input{
+    width:100%;
+    padding:14px;
+    margin:12px 0;
+    border:1px solid #D1D5DB;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.form-container input:focus{
+    outline:none;
+    border:2px solid #52B788;
+}
+
+/* =======================
+   Buttons
+======================= */
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.form-container button{
+    width:100%;
+    background:#2D6A4F;
+}
+
+.edit-btn{
+    background:#3B82F6;
+    margin-right:8px;
+}
+
+.delete-btn{
+    background:#EF4444;
+}
+
+/* =======================
+   Search
+======================= */
+
+.search-container{
+    margin:25px 0;
+}
+
+.search-input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #CBD5E1;
+}
+
+/* =======================
+   Table
+======================= */
+
+.table-container{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#D8F3DC;
+}
+
+th{
+    padding:15px;
+    color:#1B4332;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+}
+
+tbody tr:nth-child(even){
+    background:#F8FAFC;
+}
+
+tbody tr:hover{
+    background:#ECFDF5;
+}
+
+/* =======================
+   Department Cards
+======================= */
+
+.department-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.department-card{
+    padding:25px;
+    text-align:center;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.department-card:hover{
+    transform:translateY(-8px);
+}
+
+.department-card:nth-child(1){background:#DBEAFE;}
+.department-card:nth-child(2){background:#D1FAE5;}
+.department-card:nth-child(3){background:#FCE7F3;}
+.department-card:nth-child(4){background:#FEF3C7;}
+.department-card:nth-child(5){background:#E9D5FF;}
+.department-card:nth-child(6){background:#FDE68A;}
+
+/* =======================
+   Report
+======================= */
+
+.report-box{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+/* =======================
+   Responsive
+======================= */
+
+@media(max-width:768px){
+
+.navbar{
+    flex-direction:column;
+    gap:15px;
+}
+
+.nav-links{
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.form-container{
+    width:95%;
+}
+
+.dashboard-cards,
+.department-container{
+    grid-template-columns:1fr;
+}
+
+table{
+    font-size:14px;
+}
+
+}
