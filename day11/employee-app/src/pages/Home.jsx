@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import { getEmployees } from "../services/employeeService";
+import DashboardCards from "../components/DashboardCards";
+
 
 function Home() {
 
   const [employees, setEmployees] = useState([]);
+
+
+  const role = localStorage.getItem("role");
+  const username = localStorage.getItem("username");
+
+
 
   useEffect(() => {
 
     loadEmployees();
 
   }, []);
+
+
 
   const loadEmployees = async () => {
 
@@ -19,7 +29,7 @@ function Home() {
 
       setEmployees(data);
 
-    } catch (error) {
+    } catch(error) {
 
       console.log(error);
 
@@ -27,72 +37,52 @@ function Home() {
 
   };
 
-  // Total Employees
-  const totalEmployees = employees.length;
 
-  // Total Departments
-  const totalDepartments = [
-    ...new Set(employees.map(emp => emp.department))
-  ].length;
-
-  // Total Emails
-  const totalEmails = employees.filter(
-    emp => emp.email !== ""
-  ).length;
-
-  // New Employees (same count for now)
-  const newEmployees = employees.length;
 
   return (
 
     <div className="home-container">
 
-      <h1>Employee Management Dashboard</h1>
 
-      <p>
-        Welcome to Employee Management System
-      </p>
+      <div className="dashboard-header">
 
-      <div className="dashboard-cards">
 
-        <div className="card">
+        <h1>
+          🏢 ABC Technology
+        </h1>
 
-          <h3>Total Employees</h3>
 
-          <h1>{totalEmployees}</h1>
+        <h2>
 
-        </div>
+          {
+            role === "admin"
+            ? "Welcome Admin 👋"
+            : `Welcome ${username} 👋`
+          }
 
-        <div className="card">
+        </h2>
 
-          <h3>Departments</h3>
 
-          <h1>{totalDepartments}</h1>
+        <p>
+          Employee Management System Dashboard
+        </p>
 
-        </div>
-
-        <div className="card">
-
-          <h3>Registered Emails</h3>
-
-          <h1>{totalEmails}</h1>
-
-        </div>
-
-        <div className="card">
-
-          <h3>New Employees</h3>
-
-          <h1>{newEmployees}</h1>
-
-        </div>
 
       </div>
+
+
+
+      {/* Dashboard Cards */}
+
+      <DashboardCards employees={employees}/>
+
+
 
     </div>
 
   );
 
 }
+
 
 export default Home;

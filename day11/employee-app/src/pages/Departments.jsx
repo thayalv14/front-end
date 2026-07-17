@@ -1,117 +1,358 @@
 import { useEffect, useState } from "react";
-import { getEmployees } from "../services/employeeService";
+
 
 function Departments() {
 
+
   const [employees, setEmployees] = useState([]);
-  const [selectedDept, setSelectedDept] = useState(null);
 
-  useEffect(() => {
-    loadEmployees();
-  }, []);
+  const [selectedDept, setSelectedDept] = useState("");
 
-  const loadEmployees = async () => {
-    const data = await getEmployees();
-    setEmployees(data);
+
+
+  const departments = [
+
+    {
+      name:"IT",
+      icon:"💻",
+      color:"blue"
+    },
+
+    {
+      name:"HR",
+      icon:"👥",
+      color:"green"
+    },
+
+    {
+      name:"Finance",
+      icon:"💰",
+      color:"yellow"
+    },
+
+    {
+      name:"Marketing",
+      icon:"📢",
+      color:"pink"
+    },
+
+    {
+      name:"Sales",
+      icon:"🛒",
+      color:"purple"
+    }
+
+  ];
+
+
+
+  useEffect(()=>{
+
+    fetchEmployees();
+
+  },[]);
+
+
+
+
+  const fetchEmployees = async()=>{
+
+    try{
+
+
+      const response = await fetch(
+
+        "https://6a4b3685f5eab0bb6b625712.mockapi.io/Empolyees"
+
+      );
+
+
+      const data = await response.json();
+
+
+      setEmployees(data);
+
+
+    }
+
+    catch(error){
+
+      console.log(error);
+
+    }
+
   };
 
-  const departments = [...new Set(employees.map(emp => emp.department))];
 
-  const deptEmployees = employees.filter(
-    emp => emp.department === selectedDept
+
+
+
+
+  const departmentCount = (department)=>{
+
+
+    return employees.filter(
+
+      (emp)=>
+
+      emp.department === department
+
+    ).length;
+
+
+  };
+
+
+
+
+
+  const filteredEmployees = employees.filter(
+
+    (emp)=>
+
+    emp.department === selectedDept
+
   );
 
+
+
+
+
+
   return (
-    <div className="page-container">
 
-      <h1>🏢 Departments</h1>
 
-      {!selectedDept ? (
+    <div className="department-page">
 
-        <div className="dashboard-cards">
 
-          {departments.map((dept) => (
 
-            <div
-              key={dept}
-              className="card"
-              onClick={() => setSelectedDept(dept)}
-              style={{ cursor: "pointer" }}
+      <div className="department-title">
+
+
+        <h1>
+
+          🏢 Departments
+
+        </h1>
+
+
+        <p>
+
+          Manage employees department wise
+
+        </p>
+
+
+      </div>
+
+
+
+
+
+
+      <div className="dept-container">
+
+
+        {
+
+          departments.map((dept)=>(
+
+
+            <button
+
+              key={dept.name}
+
+
+              className={`dept-card ${dept.color} ${
+                
+                selectedDept===dept.name
+
+                ?
+
+                "selected"
+
+                :
+
+                ""
+
+              }`}
+
+
+              onClick={()=>setSelectedDept(dept.name)}
+
             >
 
-              <h2>{dept}</h2>
 
-              <p>
-                Employees :
-                {
-                  employees.filter(
-                    emp => emp.department === dept
-                  ).length
-                }
-              </p>
 
-            </div>
+              <div className="dept-icon">
 
-          ))}
+                {dept.icon}
 
-        </div>
+              </div>
 
-      ) : (
 
-        <div className="table-container">
 
-          <button
-            className="back-btn"
-            onClick={() => setSelectedDept(null)}
-          >
-            ← Back
-          </button>
+              <h2>
 
-          <h2 style={{ margin: "20px 0" }}>
-            {selectedDept} Department
-          </h2>
+                {dept.name}
 
-          <table>
+              </h2>
 
-            <thead>
 
-              <tr>
 
-                <th>Employee ID</th>
-                <th>Name</th>
-                <th>Email</th>
+              <span>
 
-              </tr>
+                {departmentCount(dept.name)}
 
-            </thead>
+                {" "}Employees
 
-            <tbody>
+              </span>
 
-              {deptEmployees.map((emp) => (
 
-                <tr key={emp.id}>
 
-                  <td>{emp.employeeId}</td>
+            </button>
 
-                  <td>{emp.name}</td>
 
-                  <td>{emp.email}</td>
+
+          ))
+
+        }
+
+
+      </div>
+
+
+
+
+
+
+
+      {
+
+        selectedDept && (
+
+
+          <div className="department-table">
+
+
+
+            <h2>
+
+              {selectedDept} Department Employees
+
+            </h2>
+
+
+
+
+            <table>
+
+
+              <thead>
+
+                <tr>
+
+                  <th>Employee ID</th>
+
+                  <th>Name</th>
+
+                  <th>Gender</th>
+
+                  <th>Salary</th>
+
+                  <th>Email</th>
 
                 </tr>
 
-              ))}
 
-            </tbody>
+              </thead>
 
-          </table>
 
-        </div>
 
-      )}
+
+
+              <tbody>
+
+
+
+              {
+
+
+              filteredEmployees.length > 0 ?
+
+
+              filteredEmployees.map((emp)=>(
+
+
+                <tr key={emp.id}>
+
+
+                  <td>{emp.empId}</td>
+
+                  <td>{emp.name}</td>
+
+                  <td>{emp.gender}</td>
+
+                  <td>₹ {emp.salary}</td>
+
+                  <td>{emp.email}</td>
+
+
+                </tr>
+
+
+
+              ))
+
+
+
+              :
+
+
+
+              (
+
+                <tr>
+
+                  <td colSpan="5">
+
+                    No Employees Found
+
+                  </td>
+
+                </tr>
+
+              )
+
+
+              }
+
+
+
+              </tbody>
+
+
+            </table>
+
+
+          </div>
+
+
+        )
+
+
+      }
+
+
+
 
     </div>
+
+
   );
 
 }
+
+
 
 export default Departments;

@@ -3,112 +3,166 @@ import { useState, useEffect } from "react";
 function EmployeeForm({ onAdd, onUpdate, editingEmployee }) {
 
   const [employee, setEmployee] = useState({
-    employeeId: "",
+    empId: "",
     name: "",
+    gender: "",
+    salary: "",
     department: "",
-    email: "",
+    email: ""
   });
 
   useEffect(() => {
+
     if (editingEmployee) {
+
       setEmployee({
-        employeeId: editingEmployee.employeeId || "",
+        id: editingEmployee.id,
+        empId: editingEmployee.empId || "",
         name: editingEmployee.name || "",
+        gender: editingEmployee.gender || "",
+        salary: editingEmployee.salary || "",
         department: editingEmployee.department || "",
-        email: editingEmployee.email || "",
+        email: editingEmployee.email || ""
       });
+
     } else {
+
       setEmployee({
-        employeeId: "",
+        empId: "",
         name: "",
+        gender: "",
+        salary: "",
         department: "",
-        email: "",
+        email: ""
       });
+
     }
+
   }, [editingEmployee]);
 
   const handleChange = (e) => {
+
     setEmployee({
       ...employee,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
+
   };
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
-    if (
-      employee.employeeId === "" ||
-      employee.name === "" ||
-      employee.department === "" ||
-      employee.email === ""
-    ) {
-      alert("Please fill all fields");
+    if (!employee.empId || !employee.name) {
+      alert("Employee ID and Name are required");
       return;
     }
 
-    if (editingEmployee) {
-      onUpdate(editingEmployee.id, employee);
+    if (employee.id) {
+      onUpdate(employee);
     } else {
       onAdd(employee);
     }
 
     setEmployee({
-      employeeId: "",
+      empId: "",
       name: "",
+      gender: "",
+      salary: "",
       department: "",
-      email: "",
+      email: ""
     });
+
   };
 
   return (
+
     <div className="form-container">
 
       <h2>
-        {editingEmployee ? "Update Employee" : "Add Employee"}
+        {employee.id ? "Update Employee" : "Add Employee"}
       </h2>
 
       <form onSubmit={handleSubmit}>
 
         <input
+          id="empId"
           type="text"
-          name="employeeId"
-          placeholder="Employee ID"
-          value={employee.employeeId}
+          name="empId"
+          placeholder="Employee ID (EMP101)"
+          value={employee.empId}
           onChange={handleChange}
+          required
         />
 
         <input
+          id="empName"
           type="text"
           name="name"
           placeholder="Employee Name"
           value={employee.name}
           onChange={handleChange}
+          required
         />
 
+        <select
+          id="gender"
+          name="gender"
+          value={employee.gender}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
         <input
-          type="text"
+          id="salary"
+          type="number"
+          name="salary"
+          placeholder="Salary"
+          value={employee.salary}
+          onChange={handleChange}
+          required
+        />
+
+        <select
+          id="department"
           name="department"
-          placeholder="Department"
           value={employee.department}
           onChange={handleChange}
-        />
+          required
+        >
+          <option value="">Select Department</option>
+          <option value="IT">IT</option>
+          <option value="HR">HR</option>
+          <option value="Finance">Finance</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Sales">Sales</option>
+        </select>
 
         <input
+          id="email"
           type="email"
           name="email"
-          placeholder="Employee Email"
+          placeholder="Email"
           value={employee.email}
           onChange={handleChange}
+          required
         />
 
-        <button type="submit">
-          {editingEmployee ? "Update Employee" : "Add Employee"}
+        <button
+          id="addEmployeeBtn"
+          type="submit"
+        >
+          {employee.id ? "Update Employee" : "Add Employee"}
         </button>
 
       </form>
 
     </div>
+
   );
 }
 
