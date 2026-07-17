@@ -1,0 +1,14 @@
+com\employee\automation\MyProfileTest.class
+com\employee\automation\DashboardTest.class
+com\employee\automation\LoginTest.class
+com\employee\automation\AddEmployeeTest.class
+com\employee\automation\EditEmployeeTest.class
+com\employee\automation\AttendanceTest.class
+com\employee\automation\DeleteEmployeeTest.class
+com\employee\automation\DepartmentTest.class
+com\employee\automation\LogoutTest.class
+com\employee\automation\AnnouncementsTest.class
+com\employee\automation\EmployeeListTest.class
+com\employee\automation\SearchEmployeeTest.class
+com\employee\automation\ValidationTest.class
+com\employee\automation\ReportsTest.class
