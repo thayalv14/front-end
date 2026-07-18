@@ -1,0 +1,90 @@
+/* Container */
+.container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:1s;
+}
+
+/* Green Animation */
+.increase-bg{
+    background:linear-gradient(-45deg,#00c853,#69f0ae,#00e676,#1de9b6);
+    background-size:400% 400%;
+    animation:bgMove 6s infinite;
+}
+
+/* Red Animation */
+.decrease-bg{
+    background:linear-gradient(-45deg,#ff1744,#ff5252,#ff8a80,#ff4081);
+    background-size:400% 400%;
+    animation:bgMove 6s infinite;
+}
+
+/* Blue Animation */
+.reset-bg{
+    background:linear-gradient(-45deg,#2196f3,#03a9f4,#00bcd4,#64b5f6);
+    background-size:400% 400%;
+    animation:bgMove 6s infinite;
+}
+
+/* Background Animation */
+@keyframes bgMove{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Counter Box */
+.counter-box{
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    width:400px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+/* Counter */
+.count{
+    display:block;
+    font-size:60px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+/* Buttons */
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.increase-btn{
+    background:#00c853;
+}
+
+.decrease-btn{
+    background:#f44336;
+}
+
+.reset-btn{
+    background:#2196f3;
+}

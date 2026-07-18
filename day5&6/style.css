@@ -1,0 +1,241 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Animated Background */
+
+body{
+
+    font-family:'Poppins',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+
+    background:linear-gradient(-45deg,#6a11cb,#2575fc,#00c9ff,#92fe9d);
+    background-size:400% 400%;
+    animation:bgAnimation 10s ease infinite;
+
+}
+
+@keyframes bgAnimation{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* Container */
+
+.container{
+
+    width:420px;
+    padding:30px;
+
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+
+    text-align:center;
+
+}
+
+/* Heading */
+
+h2{
+
+    color:#fff;
+    margin-bottom:25px;
+    font-size:30px;
+    font-weight:600;
+
+}
+
+/* Input Area */
+
+.input-box{
+
+    display:flex;
+    gap:10px;
+
+}
+
+input{
+
+    flex:1;
+    padding:12px;
+
+    border:none;
+    outline:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+}
+
+input::placeholder{
+
+    color:#777;
+
+}
+
+/* Button */
+
+button{
+
+    padding:12px 18px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#ff9800;
+
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#ff5722;
+
+    transform:scale(1.08);
+
+}
+
+/* Task List */
+
+ul{
+
+    list-style:none;
+    margin-top:25px;
+
+}
+
+/* Task */
+
+li{
+
+    background:rgba(255,255,255,.9);
+
+    color:#333;
+
+    margin:12px 0;
+    padding:12px 15px;
+
+    border-radius:12px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    animation:slide .4s ease;
+
+}
+
+@keyframes slide{
+
+    from{
+
+        opacity:0;
+        transform:translateX(-30px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateX(0);
+
+    }
+
+}
+
+/* Remove Button */
+
+li button{
+
+    background:#f44336;
+
+    padding:8px 12px;
+
+    font-size:14px;
+
+}
+
+li button:hover{
+
+    background:#c62828;
+
+}
+
+/* Scroll */
+
+#taskList{
+
+    max-height:300px;
+    overflow-y:auto;
+
+}
+
+#taskList::-webkit-scrollbar{
+
+    width:7px;
+
+}
+
+#taskList::-webkit-scrollbar-thumb{
+
+    background:#ffffff99;
+    border-radius:10px;
+
+}
+
+/* Responsive */
+
+@media(max-width:480px){
+
+.container{
+
+    width:90%;
+
+}
+
+.input-box{
+
+    flex-direction:column;
+
+}
+
+button{
+
+    width:100%;
+
+}
+
+}
